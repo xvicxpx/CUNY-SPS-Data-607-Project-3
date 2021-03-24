@@ -1,0 +1,12 @@
+---
+title: "CUNY SPS 607 Project 3"
+output: html_notebook
+---
+
+
+```{r importing sql data}
+library(RMySQL)
+
+conn = dbConnect(MySQL(), user='admin', dbname='MsdsProject3', host='project3.c4h7w2meulft.us-east-1.rds.amazonaws.com', port=3306)
+```
+
