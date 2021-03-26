@@ -37,3 +37,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+#Stupid Mac Files
+.DS_Store
+
+# Password File
+db_pw.txt
