@@ -55,7 +55,6 @@ Please find the head of the raw data.
 reactable(head(rawDataGitHub,20))
 ```
 
-<<<<<<< HEAD
 =======
 ## Tidying Data
 
