@@ -7,6 +7,7 @@ output: html_document
 library(RMySQL)
 library(tidyverse)
 library(reactable)
+library(stringr)
 ```
 
 # Introduction
@@ -57,6 +58,32 @@ reactable(head(rawDataGitHub,20))
 
 =======
 ## Tidying Data
+
+First we will need to add a column to identify each participant. This will just be a simple incrementing number id which will allow us to keep track of users responses once the data has been unpivoted using the pivot_long function. We will also be needing to remove the first row as the first row includes the question being asked.
+
+```{r Cleaning of Data}
+clean_data = rawDataGitHub[-1,]
+
+clean_data = clean_data[-c(1)]
+
+clean_data = tibble::rowid_to_column(clean_data, "id")
+```
+
+
+In the unpivoting we will also be cleaning up all the sub questions. The sub questions allows for the respondent to have more than one answer. Instead of treating sub questions as individuals questions we will be combining them together to give us more data and also allow for easier analysis.
+
+```{r unpivoting of data}
+clean_data = clean_data %>%
+  pivot_longer(!id, names_to='Question', values_to='Response') %>%
+  mutate(Question = str_extract(Question, 'Q\\d*'))
+```
+
+Because we fixed the sub questions it created a lot of empty responses. We will be filtering out any empty responses as it is wasted space.
+```{r filtering out unanswered questions}
+clean_data = clean_data %>%
+  filter(!is.nan(Response))
+```
+
 
 ## Insert into SQL
 
