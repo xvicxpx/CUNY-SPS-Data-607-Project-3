@@ -15,7 +15,7 @@ The data source we will be using is a [2020 survey from Kaggle](https://www.kagg
 
 In the survey 39 questions were asked. Many of the survey questions are relevant to answering, "What is the most valued data science skills." The survey also included sub questions which was labeled using the question number and a letter. The data set also includes branching questions where if a question if a specific question is answered then an alternative question is asked. The dataset is a very long and sparse data set which will require a lot of cleaning before any data analysis can be done.
 
-![ERD Diagram](ERD.png)
+![ERD Diagram](https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/ERD.png)
 
 In order to normalize the database, we created a relational database using tables with primary keys. This allows the database to be organized and joined in many ways. The database tables are split into questions, answers, and user responses and are all joined using index and primary keys. All the information is uploaded into Amazon Web Services allowing multiple people to be querying the dataset at the same time.
 
@@ -54,5 +54,6 @@ reactable(head(rawDataGitHub,20))
 ```
 
 ## Tidying Data
+
 
 ## Insert into SQL
