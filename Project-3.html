@@ -177,8 +177,16 @@ pre code {
 <pre class="r"><code>library(RMySQL)
 library(tidyverse)
 library(reactable)</code></pre>
+<<<<<<< HEAD:Project-3.html
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
+=======
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+>>>>>>> de1bc0de371b7687e7e7d930c051b39a1bde1c23:Project 3.nb.html
 <p>The data source we will be using is a <a href="https://www.kaggle.com/c/kaggle-survey-2020">2020 survey from Kaggle</a> which surveyed Data Scientist. The questions in the survey asked about which languages, tools, and skills that Data Scientist use daily. The data is a csv file with 355 columns and 20,000 rows and will need to be cleaning up before it is uploaded into a normalized database. With the dataset we will looking at the answers and seeing what answers come up frequently as those are the skills and tools that are the valuable skills that data scientists have.</p>
 <p>In the survey 39 questions were asked. Many of the survey questions are relevant to answering, “What is the most valued data science skills.” The survey also included sub questions which was labeled using the question number and a letter. The data set also includes branching questions where if a question if a specific question is answered then an alternative question is asked. The dataset is a very long and sparse data set which will require a lot of cleaning before any data analysis can be done.</p>
 <div class="figure">
@@ -205,8 +213,14 @@ conn = dbConnect(MySQL(), user=&#39;admin&#39;, pass= pass , dbname=&#39;project
                  host=&#39;project3.c4h7w2meulft.us-east-1.rds.amazonaws.com&#39;, port=3306)
 
 dbListTables(conn = conn)</code></pre>
+<<<<<<< HEAD:Project-3.html
 <pre><code>## [1] &quot;SurveyMltQuestionAnswers&quot; &quot;SurveyQuestionnaire&quot;     
 ## [3] &quot;SurveyQuestions&quot;          &quot;SurveyResponse&quot;</code></pre>
+=======
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+>>>>>>> de1bc0de371b7687e7e7d930c051b39a1bde1c23:Project 3.nb.html
 </div>
 <div id="import-raw-data-from-github" class="section level2">
 <h2>Import Raw Data from Github</h2>
@@ -225,6 +239,10 @@ dbListTables(conn = conn)</code></pre>
 <h1>Tidying Data</h1>
 </div>
 
+<<<<<<< HEAD:Project-3.html
+=======
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ1VOWSBTUFMgNjA3IFByb2plY3QgMyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3Igc2V0dXB9CmxpYnJhcnkoUk15U1FMKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyZWFjdGFibGUpCmBgYAoKIyMgSW50cm9kdWN0aW9uCgpUaGUgZGF0YSBzb3VyY2Ugd2Ugd2lsbCBiZSB1c2luZyBpcyBhIFsyMDIwIHN1cnZleSBmcm9tIEthZ2dsZV0oaHR0cHM6Ly93d3cua2FnZ2xlLmNvbS9jL2thZ2dsZS1zdXJ2ZXktMjAyMCkgd2hpY2ggc3VydmV5ZWQgRGF0YSBTY2llbnRpc3QuIFRoZSBxdWVzdGlvbnMgaW4gdGhlIHN1cnZleSBhc2tlZCBhYm91dCB3aGljaCBsYW5ndWFnZXMsIHRvb2xzLCBhbmQgc2tpbGxzIHRoYXQgRGF0YSBTY2llbnRpc3QgdXNlIGRhaWx5LiBUaGUgZGF0YSBpcyBhIGNzdiBmaWxlIHdpdGggMzU1IGNvbHVtbnMgYW5kIDIwLDAwMCByb3dzIGFuZCB3aWxsIG5lZWQgdG8gYmUgY2xlYW5pbmcgdXAgYmVmb3JlIGl0IGlzIHVwbG9hZGVkIGludG8gYSBub3JtYWxpemVkIGRhdGFiYXNlLiBXaXRoIHRoZSBkYXRhc2V0IHdlIHdpbGwgbG9va2luZyBhdCB0aGUgYW5zd2VycyBhbmQgc2VlaW5nIHdoYXQgYW5zd2VycyBjb21lIHVwIGZyZXF1ZW50bHkgYXMgdGhvc2UgYXJlIHRoZSBza2lsbHMgYW5kIHRvb2xzIHRoYXQgYXJlIHRoZSB2YWx1YWJsZSBza2lsbHMgdGhhdCBkYXRhIHNjaWVudGlzdHMgaGF2ZS4KCkluIHRoZSBzdXJ2ZXkgMzkgcXVlc3Rpb25zIHdlcmUgYXNrZWQuIE1hbnkgb2YgdGhlIHN1cnZleSBxdWVzdGlvbnMgYXJlIHJlbGV2YW50IHRvIGFuc3dlcmluZywgIldoYXQgaXMgdGhlIG1vc3QgdmFsdWVkIGRhdGEgc2NpZW5jZSBza2lsbHMuIiBUaGUgc3VydmV5IGFsc28gaW5jbHVkZWQgc3ViIHF1ZXN0aW9ucyB3aGljaCB3YXMgbGFiZWxlZCB1c2luZyB0aGUgcXVlc3Rpb24gbnVtYmVyIGFuZCBhIGxldHRlci4gVGhlIGRhdGEgc2V0IGFsc28gaW5jbHVkZXMgYnJhbmNoaW5nIHF1ZXN0aW9ucyB3aGVyZSBpZiBhIHF1ZXN0aW9uIGlmIGEgc3BlY2lmaWMgcXVlc3Rpb24gaXMgYW5zd2VyZWQgdGhlbiBhbiBhbHRlcm5hdGl2ZSBxdWVzdGlvbiBpcyBhc2tlZC4gVGhlIGRhdGFzZXQgaXMgYSB2ZXJ5IGxvbmcgYW5kIHNwYXJzZSBkYXRhIHNldCB3aGljaCB3aWxsIHJlcXVpcmUgYSBsb3Qgb2YgY2xlYW5pbmcgYmVmb3JlIGFueSBkYXRhIGFuYWx5c2lzIGNhbiBiZSBkb25lLgoKIVtFUkQgRGlhZ3JhbV0oaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3h2aWN4cHgvQ1VOWS1TUFMtRGF0YS02MDctUHJvamVjdC0zL21haW4vRVJELnBuZykKCkluIG9yZGVyIHRvIG5vcm1hbGl6ZSB0aGUgZGF0YWJhc2UsIHdlIGNyZWF0ZWQgYSByZWxhdGlvbmFsIGRhdGFiYXNlIHVzaW5nIHRhYmxlcyB3aXRoIHByaW1hcnkga2V5cy4gVGhpcyBhbGxvd3MgdGhlIGRhdGFiYXNlIHRvIGJlIG9yZ2FuaXplZCBhbmQgam9pbmVkIGluIG1hbnkgd2F5cy4gVGhlIGRhdGFiYXNlIHRhYmxlcyBhcmUgc3BsaXQgaW50byBxdWVzdGlvbnMsIGFuc3dlcnMsIGFuZCB1c2VyIHJlc3BvbnNlcyBhbmQgYXJlIGFsbCBqb2luZWQgdXNpbmcgaW5kZXggYW5kIHByaW1hcnkga2V5cy4gQWxsIHRoZSBpbmZvcm1hdGlvbiBpcyB1cGxvYWRlZCBpbnRvIEFtYXpvbiBXZWIgU2VydmljZXMgYWxsb3dpbmcgbXVsdGlwbGUgcGVvcGxlIHRvIGJlIHF1ZXJ5aW5nIHRoZSBkYXRhc2V0IGF0IHRoZSBzYW1lIHRpbWUuCgojIyBPcGVuaW5nIENvbm5lY3Rpb24gdG8gU1FMIFNlcnZlcgoKV2Ugd2lsbCBiZWdpbiBieSBvcGVuaW5nIGEgY29ubmVjdGlvbiB0byB0aGUgU1FMIGluc3RhbmNlIHRoYXQgd2FzIGNyZWF0ZWQgb24gQVdTLiBGb3Igc2VjdXJpdHkgcHVyb3Bvc2VzIHRoZSBwYXNzd29yZCBjYW4gYmUgc3RvcmVkIGluIGEgZmlsZSB0aGF0IHdpbGwgbm90IGJlIHN5bmNlZCB0byBnaXRodWIsIG9yIHRoZSB1c2VyIHdpbGwgYmUgcHJvbXB0ZWQgdG8gZW50ZXIgaXQgaWYgdXNpbmcgUlN0dWRpby4KCmBgYHtyIGVzdGFibGlzaC1zcWwtY29ubmVjdGlvbn0KcHdmaWxlIDwtICJkYl9wdy50eHQiCmlmICggZmlsZS5leGlzdHMocHdmaWxlKSApCnsKICBwYXNzIDwtIHJlYWRMaW5lcyhwd2ZpbGUpCn1lbHNlIAp7CiAgcGFzcyA8LSByc3R1ZGlvYXBpOjphc2tGb3JQYXNzd29yZCggcHJvbXB0ID0gIlBsZWFzZSBlbnRlciBEQiBwYXNzd29yZDoiICkgCn0KCmNvbm4gPSBkYkNvbm5lY3QoTXlTUUwoKSwgdXNlcj0nYWRtaW4nLCBwYXNzPSBwYXNzICwgZGJuYW1lPSdwcm9qZWN0M2RiJywgCiAgICAgICAgICAgICAgICAgaG9zdD0ncHJvamVjdDMuYzRoN3cybWV1bGZ0LnVzLWVhc3QtMS5yZHMuYW1hem9uYXdzLmNvbScsIHBvcnQ9MzMwNikKCmRiTGlzdFRhYmxlcyhjb25uID0gY29ubikKYGBgCgojIyBJbXBvcnQgUmF3IERhdGEgZnJvbSBHaXRodWIKClRoZSByYXcgZGF0YSBpcyBhdmFpbGJsZSBmcm9tIEthZ2dsZS4gSG93ZXZlciwgZm9yIGVhc2llciBhY2Nlc3Mgd2UgaGF2ZSB1cGxvYWRlZCBpdCB0byBhIFtnaXRodWIgcmVwb3NpdG9yeV0oaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3h2aWN4cHgvQ1VOWS1TUFMtRGF0YS02MDctUHJvamVjdC0zL21haW4va2FnZ2xlLXN1cnZleS0yMDIwL2thZ2dsZV9zdXJ2ZXlfMjAyMF9yZXNwb25zZXMuY3MpIHRvIGJlIHVzZWQgZm9yIHRoaXMgcHJvamVjdC4KCmBgYHtyIGltcG9ydC1yYXctZGF0YSwgbWVzc2FnZT1GQUxTRX0KcmF3RGF0YUdpdEh1YiA8LSByZWFkX2NzdignaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3h2aWN4cHgvQ1VOWS1TUFMtRGF0YS02MDctUHJvamVjdC0zL21haW4va2FnZ2xlLXN1cnZleS0yMDIwL2thZ2dsZV9zdXJ2ZXlfMjAyMF9yZXNwb25zZXMuY3N2JykKYGBgCgpQbGVhc2UgZmluZCB0aGUgaGVhZCBvZiB0aGUgcmF3IGRhdGEuCgpgYGB7ciByYXctZGF0YS1wcmV2aWV3fQpyZWFjdGFibGUoaGVhZChyYXdEYXRhR2l0SHViLDIwKSkKYGBgCgojIyBUaWR5aW5nIERhdGEKCiMjIEluc2VydCBpbnRvIFNRTAo=</div>
+>>>>>>> de1bc0de371b7687e7e7d930c051b39a1bde1c23:Project 3.nb.html
 
 
 

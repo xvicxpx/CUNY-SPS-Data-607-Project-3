@@ -55,6 +55,12 @@ Please find the head of the raw data.
 reactable(head(rawDataGitHub,20))
 ```
 
+<<<<<<< HEAD
+=======
+## Tidying Data
+
+
+>>>>>>> de1bc0de371b7687e7e7d930c051b39a1bde1c23
 ## Insert into SQL
 
 # Tidying Data
