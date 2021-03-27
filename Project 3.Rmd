@@ -47,7 +47,7 @@ dbListTables(conn = conn)
 The raw data is availble from Kaggle. However, for easier access we have uploaded it to a [github repository](https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.cs) to be used for this project.
 
 ```{r import-raw-data, message=FALSE}
-rawDataGitHub <- read_csv('https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.csv')
+rawDataGitHub <- read_csv('https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.csv' )
 ```
 
 Please find the head of the raw data.
@@ -62,11 +62,13 @@ reactable(head(rawDataGitHub,20))
 First we will need to add a column to identify each participant. This will just be a simple incrementing number id which will allow us to keep track of users responses once the data has been unpivoted using the pivot_long function. We will also be needing to remove the first row as the first row includes the question being asked.
 
 ```{r Cleaning of Data}
-clean_data = rawDataGitHub[-1,]
+clean_data <- rawDataGitHub[ -1,]
 
-clean_data = clean_data[-c(1)]
+clean_data <- clean_data %>% 
+  mutate(id = rownames(clean_data)) %>% 
+  select(id, everything() )
 
-clean_data = tibble::rowid_to_column(clean_data, "id")
+reactable(head(clean_data) )
 ```
 
 
@@ -74,14 +76,13 @@ In the unpivoting we will also be cleaning up all the sub questions. The sub que
 
 ```{r unpivoting of data}
 clean_data <- clean_data %>%
-  pivot_longer(!id, names_to='Question', values_to='Response') %>%
-  mutate(Question = str_extract(Question, 'Q\\d*'))
+  pivot_longer(cols = Q1:Q35_B_OTHER, names_to ="Question", values_to='Response')
 ```
 
 Because we fixed the sub questions it created a lot of empty responses. We will be filtering out any empty responses as it is wasted space.
 ```{r filtering out unanswered questions}
 clean_data <- clean_data %>%
-  filter(!is.nan(Response))
+  drop_na(Response)
 ```
 
 
