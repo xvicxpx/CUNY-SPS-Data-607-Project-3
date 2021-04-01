@@ -91,7 +91,7 @@ clean_data <- clean_data %>%
 
 As we know the title of Data Scientist is a very vague title which has many different job functions. This title may sometimes be used interchangable between Data Analyst, Business Analyst, and Data Engineer. We would like to look specifically what skills make a Data Scientist
 
-## Analysis 1
+## Analysis 1: Programming Language
 
 In the survey it asked Data Scientist "what programming language do you use on a daily basis," and "what programming language would you recommend an aspiring data scientist to learn." We will be looking at the responses and seeing what are the top programming languages data scientist should learn.
 
@@ -110,7 +110,7 @@ program_lang %>%
 
 We can see that Python is what Data Scientist would recommend by a long margin following by R. One interesting thing to look at is the trend overtime and if python is becoming the default standard in Data Science
 
-## Analysis 2
+## Analysis 2: Relational Database
 
 Another skill that is used a lot by Data Scientist is management and querying of relational databases. It is important to be able to quickly and efficiently get the data that is stored in the server for models and analysis
 
@@ -128,3 +128,46 @@ data_base %>%
 ```
 
 We can see that MySQL is the post popular followed by Postgres and Microsoft SQL. While a lot of SQL is very similar to one another they all have their own variations and functions which can make it difficult if someone is looking to switch to another SQL variant.
+
+## Analysis 4: Age and Gender
+
+Question 1 asked what is the respondent age. I would like so see what is the age distribution of Data Scientist since this is a very new field that has only recently emerged
+
+```{r}
+wage <- clean_data %>%
+  filter(Question == 'Q1') %>%
+  group_by(Response) %>%
+  tally() %>%
+  arrange(desc(n))
+```
+
+```{r}
+wage %>%
+  ggplot(aes(x=Response, y=n)) + geom_bar(stat='identity')
+```
+
+We can see that most Data Scientist are between 18 - 39 in this Kaggle Survey. I would like to know if this sample of data truly represents the population or if this data set has bias with only younger people participating in this survey.
+
+```{r}
+gender <- clean_data %>%
+  filter(Question == 'Q2') %>%
+  group_by(Response) %>%
+  tally() %>%
+  arrange(desc(n))
+```
+
+```{r}
+gender %>%
+  ggplot(aes(x=reorder(Response, n, sum), y=n)) + geom_bar(stat='identity')
+```
+
+```{r}
+gender %>%
+  ggplot(aes(x='', y=n, fill=Response)) + geom_bar(stat='identity', width=1) + coord_polar("y", start=0)
+```
+
+
+We can also see that Men are dominating the field of data science with only women making up less than 25% of data scientists.
+
+
+
