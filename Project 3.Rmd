@@ -27,7 +27,7 @@ In order to normalize the database, we created a relational database using table
 
 ## Opening Connection to SQL Server
 
-We will begin by opening a connection to the SQL instance that was created on AWS. For security puroposes the password can be stored in a file that will not be synced to github, or the user will be prompted to enter it if using RStudio.
+We will begin by opening a connection to the SQL instance that was created on AWS. For security purposes the password can be stored in a file that will not be synced to github, or the user will be prompted to enter it if using RStudio.
 
 ```{r establish-sql-connection}
 pwfile <- "db_pw.txt"
@@ -47,7 +47,7 @@ dbListTables(conn = conn)
 
 ## Import Raw Data from Github
 
-The raw data is availble from Kaggle. However, for easier access we have uploaded it to a [github repository](https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.cs) to be used for this project.
+The raw data is available from Kaggle. However, for easier access we have uploaded it to a [github repository](https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.cs) to be used for this project.
 
 ```{r import-raw-data, message=FALSE}
 rawDataGitHub <- read_csv('https://raw.githubusercontent.com/xvicxpx/CUNY-SPS-Data-607-Project-3/main/kaggle-survey-2020/kaggle_survey_2020_responses.csv' )
@@ -168,7 +168,7 @@ dbWriteTable(conn = conn, "SurveyResponse", otherDataForSQL , append = T,  row.n
 ```
 # Analysis
 
-As we know the title of Data Scientist is a very vague title which has many different job functions. This title may sometimes be used interchangable between Data Analyst, Business Analyst, and Data Engineer. We would like to look specifically what skills make a Data Scientist
+As we know the title of Data Scientist is a very vague title which has many different job functions. This title may sometimes be used interchangeable between Data Analyst, Business Analyst, and Data Engineer. We would like to look specifically what skills make a Data Scientist
 
 ## Analysis 1: Programming Language
 
