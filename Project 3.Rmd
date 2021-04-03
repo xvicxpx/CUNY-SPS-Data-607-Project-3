@@ -184,6 +184,12 @@ program_lang <- clean_data %>%
 
 ```{r}
 program_lang %>%
+  summarise(Response = Response, n = n, percent = n / sum(n))
+```
+
+
+```{r}
+program_lang %>%
   ggplot(aes(reorder(Response, n, sum), n)) + geom_bar(stat='identity') + coord_flip() + xlab('Programming Language') + ylab('Count of Response')
 ```
 
@@ -213,7 +219,7 @@ We can see that MySQL is the post popular followed by Postgres and Microsoft SQL
 Question 1 asked what is the respondent age. I would like so see what is the age distribution of Data Scientist since this is a very new field that has only recently emerged
 
 ```{r}
-wage <- clean_data %>%
+age <- clean_data %>%
   filter(Question == 'Q1') %>%
   group_by(Response) %>%
   tally() %>%
@@ -221,7 +227,7 @@ wage <- clean_data %>%
 ```
 
 ```{r}
-wage %>%
+age %>%
   ggplot(aes(x=Response, y=n)) + geom_bar(stat='identity')
 ```
 
@@ -249,4 +255,6 @@ gender %>%
 We can also see that Men are dominating the field of data science with only women making up less than 25% of data scientists.
 
 
+# Conclusion
 
+The field of data science is a rapidly growing field and the tools that data scientist are using are constantly evolving. We can see the growth in popularity of data scientist using python now instead of R with almost 80% of data scientist saying that they use or would recommend people to use python. On the other hand for relational databases we can see that MySQL is still the most popular relational database used. But for SQL based languages they are all very similar using the same base syntax. One thing that was not surprising though was that the age group for data scientist is very young with a majority of it being male. It would be interesting to see how this changes over time and if more females will join the field of data science
