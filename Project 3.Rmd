@@ -112,13 +112,18 @@ questionsFromRawData <- questionsFromRawData %>%
   mutate_all (str_trim)
 
 match <- function ( x,y) {
-  x <- str_extract (x,"([[:alpha:]]|[[:space:]]|[[:digit:]])*")
-  y <- str_extract (y,"([[:alpha:]]|[[:space:]]|[[:digit:]])*")
-  return ( str_detect(x,y) | str_detect(y,x) )
+  x <- str_replace_all(x , pattern = "[[:punct:]]", "")
+  y <- str_replace_all(y , pattern = "[[:punct:]]", "")
+  x==y
 }
 
 dbQuestionRawDataMap <- fuzzy_join(surveyQuestionsTable,questionsFromRawData, by=c("QuestionText","QuestionText") , match_fun = match ) %>% 
  select ( QuestionId, Question, QuestionType)
+```
+
+Please note the anti-fuzzy join yields the one column that we are not storing in the database.
+```{r dbQuestionRawDataMap-anti-join}
+fuzzy_anti_join(questionsFromRawData,surveyQuestionsTable, by=c("QuestionText","QuestionText") , match_fun = match )
 ```
 
 Please note, we now have a way to match the questions from the raw data with the questions in the database. This has been saved in the data table `dbQuestionRawDataMap`, this was achieved using a fuzzy join on the question text. 
@@ -126,9 +131,40 @@ Please note, we now have a way to match the questions from the raw data with the
 reactable (dbQuestionRawDataMap)
 ```
 
-In order to update the `SurveyMltQuestionAnswers` table we will need to obtain the Response ID for the multiple choice questions. These responses have been stored in the `SurveyQuestions` table. I will filter the responses from the CSV into two data frames, one which contains free response questions and another with the 
+I will create a new data frame that contains the data in the form that will be expected by the SQL table. 
 ```{r get-response-id}
+dataForSQL <- clean_data %>% 
+  rename(ResponseId = id)
 
+dataForSQL <- dataForSQL %>% 
+  left_join(y=dbQuestionRawDataMap, by = "Question") %>% 
+  select ( -starts_with('Time from') , -Question) %>% 
+  mutate (id = row_number() , QuestionaireId = 1 ) 
+```
+
+In order to update the `SurveyMltQuestionAnswers` table we will need to obtain the Response ID for the multiple choice questions. I will join this with the `dataForSQL` data frame.
+```{r}
+mltAnswerTable <- dbReadTable(conn,"SurveyMltQuestionAnswers") 
+
+multipleChoiceDataForSQL <- dataForSQL %>% 
+  filter(QuestionType == 'MULTICHOICE') 
+
+multipleChoiceDataForSQL <- 
+  inner_join(multipleChoiceDataForSQL,mltAnswerTable,by=c("QuestionId"="QuestionId","Response"="AnswerText")) %>% 
+  rename(SingleChoiceAnswerId=AnswerId) %>% 
+  select(-Response)
+
+otherDataForSQL <-dataForSQL %>% 
+  filter(QuestionType != 'MULTICHOICE') %>% 
+  rename(FreeTextResponse = Response)
+```
+
+
+We will now insert the new data frames into SQL.
+```{r sql-data-insert}
+dbGetQuery(conn,"TRUNCATE TABLE SurveyResponse")
+dbWriteTable(conn = conn, "SurveyResponse", multipleChoiceDataForSQL , append =T, row.names=F)
+dbWriteTable(conn = conn, "SurveyResponse", otherDataForSQL , append = T, , row.names=F)
 ```
 # Analysis
 
