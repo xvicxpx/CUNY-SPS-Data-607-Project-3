@@ -164,7 +164,7 @@ We will now insert the new data frames into SQL.
 ```{r sql-data-insert}
 dbGetQuery(conn,"TRUNCATE TABLE SurveyResponse")
 dbWriteTable(conn = conn, "SurveyResponse", multipleChoiceDataForSQL , append =T, row.names=F)
-dbWriteTable(conn = conn, "SurveyResponse", otherDataForSQL , append = T, , row.names=F)
+dbWriteTable(conn = conn, "SurveyResponse", otherDataForSQL , append = T,  row.names=F)
 ```
 # Analysis
 
